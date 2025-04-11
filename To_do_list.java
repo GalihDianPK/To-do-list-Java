@@ -6,7 +6,7 @@ public class To_do_list {
     public static void main (String[] args){
         Scanner input = new Scanner(System.in);
         String teks = input.nextLine();
-        boolean status = false;
+        boolean status = true;
 
         ArrayList<String> allTeks = new ArrayList<>();
 
@@ -26,8 +26,11 @@ public class To_do_list {
                     while (looping) {
                         System.out.println("Tambahkan Catatan : ");
                         String catatan = input.nextLine();
+                        input.nextLine();
 
-                        System.out.println("input Catatm? (y/n)");
+                        allTeks.add(catatan);
+
+                        System.out.println("input Catatan lagi? (y/n)");
                         char next = input.next().charAt(0); //! untuk input 1 huruf di awal
                         input.nextLine();
 
@@ -37,12 +40,23 @@ public class To_do_list {
                             looping = false;
                         } else {
                             System.out.println("Sistem Input tidak Valid");
+                            looping = false;
                         }
                     }
                     break;
             default :
-                System.out.println("Sistem tidak tersedia");                
+                System.out.println("Sistem tidak tersedia");         
+                status = false;       
             }
         }     
+        System.out.println("Apakah anda ingin keluar dari aplikasi ? (y/n) : ");
+        char keluar = input.next().charAt(0);
+        input.nextLine();
+        
+        if (keluar == 'y' || keluar == 'Y') {
+            status = false;
+        } 
+        System.out.println("Terimakasih sudah menggunakan aplikasi");
+        input.close();
     }
 }
