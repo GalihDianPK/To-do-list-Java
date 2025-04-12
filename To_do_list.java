@@ -2,6 +2,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class To_do_list {
+
+    public static void delay () {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
     
     public static void main (String[] args){
         Scanner input = new Scanner(System.in);
@@ -13,7 +21,7 @@ public class To_do_list {
         while(status){
             System.out.println("== APLIKASI MANAJEMEN TUGAS ==");
 
-            String[] arrayMenu = {"Tambah teks", "Edit teks", "Hapus tugas"};
+            String[] arrayMenu = {"Tambah teks", "Lihat catatan", "Hapus tugas"};
             for(int i = 0; i < arrayMenu.length; i ++){
                 System.out.println((i + 1) + ". " + arrayMenu[i]);
             }
@@ -26,7 +34,6 @@ public class To_do_list {
                     while (looping) {
                         System.out.println("Tambahkan Catatan : ");
                         String catatan = input.nextLine();
-                        input.nextLine();
 
                         allTeks.add(catatan);
 
@@ -44,19 +51,30 @@ public class To_do_list {
                         }
                     }
                     break;
+                case 2 :
+                    System.out.println("Sedang memuat catatan");
+                    for (int i = 0; i < 3; i++){
+                        System.out.print(".");
+                        delay();
+                    }
+                    for (int i = 0; i < allTeks.size(); i++){
+                        System.out.print(allTeks.get(i));
+                    }
             default :
                 System.out.println("Sistem tidak tersedia");         
                 status = false;       
             }
+
+            System.out.println("Apakah anda ingin keluar dari aplikasi ? (y/n) : ");
+            char keluar = input.next().charAt(0);
+            input.nextLine();
+            
+            if (keluar == 'y' || keluar == 'Y') {
+                status = false;
+                System.out.println("Terimakasih sudah menggunakan aplikasi");
+            } else if (keluar == 'N' || keluar == 'n'){
+                status = true;
+            }
         }     
-        System.out.println("Apakah anda ingin keluar dari aplikasi ? (y/n) : ");
-        char keluar = input.next().charAt(0);
-        input.nextLine();
-        
-        if (keluar == 'y' || keluar == 'Y') {
-            status = false;
-        } 
-        System.out.println("Terimakasih sudah menggunakan aplikasi");
-        input.close();
     }
 }
