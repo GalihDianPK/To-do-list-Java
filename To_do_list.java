@@ -21,7 +21,7 @@ public class To_do_list {
         while(status){
             System.out.println("== APLIKASI MANAJEMEN TUGAS ==");
 
-            String[] arrayMenu = {"Tambah teks", "Lihat catatan", "Hapus tugas"};
+            String[] arrayMenu = {"Tambah teks", "Lihat catatan", "Edit catatan", "Keluar Aplikasi"};
             for(int i = 0; i < arrayMenu.length; i ++){
                 System.out.println((i + 1) + ". " + arrayMenu[i]);
             }
@@ -43,7 +43,7 @@ public class To_do_list {
                         input.nextLine();
 
                         if (next == 'y' || next == 'Y') {
-                             allTeks.add(catatan);
+                             looping = true;
                         } else if (next == 'n' || next == 'N') {
                             looping = false;
                         } else {
@@ -58,21 +58,47 @@ public class To_do_list {
                         System.out.print(".");
                         delay();
                     }
+                        System.out.println("\n");
+
                     if (allTeks.isEmpty()){
                         System.out.println("Belum ada catatan");
                     } else {
                         for (int i = 0; i < allTeks.size(); i++){
-                            System.out.print(allTeks.get(i) + " ");
+                            System.out.println((i + 1) + "." + allTeks.get(i));
                         }
                     }
                     break;
                 case 3 :
-                
-            default :
-                System.out.println("Sistem tidak tersedia");         
-                status = false;       
-            }
+                    if (allTeks.isEmpty()){
+                        System.out.println("belum ada catatan yang diperbaharui");
+                    } else {
+                        System.out.println("Catatan kamu : ");
+                        for (int i = 0; i < allTeks.size(); i++){
+                            System.out.println((i + 1) + (". ") + allTeks.get(i) + " ");
+                        }
 
+                        System.out.println("Pilih yang ingin di edit : ");
+                        byte choice = input.nextByte();
+                        input.nextLine();
+
+                        if(choice >= 1 && choice <= allTeks.size()){
+                            System.out.println("Masukkan teks : ");
+                            String teksMasukan = input.nextLine();
+                            allTeks.set(choice -1, teksMasukan); //! untuk mengganti teks yang sudah ada
+                            System.out.println("Catatan berhasil diperbarui");
+                        } else {
+                            System.out.println("Nomor yang dimasukkan tidak valid");
+                        }
+                    break;
+                    }
+                default :
+                    for(int i = 0; i < 3; i++){
+                        System.out.print(".");
+                        delay();
+                    }         
+                    status = false; 
+                }
+                
             System.out.println("\nApakah anda ingin keluar dari aplikasi ? (y/n) : ");
             char keluar = input.next().charAt(0);
             input.nextLine();
