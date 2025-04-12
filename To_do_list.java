@@ -3,6 +3,10 @@ import java.util.ArrayList;
 
 public class To_do_list {
 
+    // revisi dul
+    // - pas ngedit, munculin nilai sebelumnya (jangan dibuat kosong)
+    // - error handling di pmeilihan menu betulin (biar bisa ngeluarin pesan klo input gk valid)
+
     public static void delay () {
         try {
             Thread.sleep(1000);
@@ -26,8 +30,16 @@ public class To_do_list {
                 System.out.println((i + 1) + ". " + arrayMenu[i]);
             }
             System.out.println("Pilih menu : ");
-            byte pilihan = input.nextByte();
-            input.nextLine();
+            byte pilihan = -1;
+
+            try {
+                pilihan = input.nextByte();
+                input.nextLine();
+            } catch (Exception e) {
+                System.out.println("\nInput tidak valid, masukkan angka antara (1-4)\n");
+                input.nextLine();
+                continue;
+            }
 
             switch (pilihan) {
                 case 1 :
@@ -83,6 +95,9 @@ public class To_do_list {
 
                         if(choice >= 1 && choice <= allTeks.size()){
                             System.out.println("Masukkan teks : ");
+                            for(int i = 0; i < allTeks.size(); i++){
+                                System.out.println((i + 1) + ". " + allTeks.get(i) + " ");
+                            }
                             String teksMasukan = input.nextLine();
                             allTeks.set(choice -1, teksMasukan); //! untuk mengganti teks yang sudah ada
                             System.out.println("Catatan berhasil diperbarui");
@@ -91,12 +106,17 @@ public class To_do_list {
                         }
                     break;
                     }
-                default :
-                    for(int i = 0; i < 3; i++){
+                case 4 :
+                    status = false;
+                    for (int i = 0; i < 3; i++){
                         System.out.print(".");
                         delay();
-                    }         
-                    status = false; 
+                    }
+                    break;
+                default :
+                    status = false;
+                    System.out.println("Pilihan tidak tersedia.  silahkan pilih (1-4).");   
+                    break;
                 }
                 
             System.out.println("\nApakah anda ingin keluar dari aplikasi ? (y/n) : ");
@@ -111,4 +131,5 @@ public class To_do_list {
             }
         }     
     }
+
 }
