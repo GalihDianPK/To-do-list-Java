@@ -27,6 +27,7 @@ public class To_do_list {
             }
             System.out.println("Pilih menu : ");
             byte pilihan = input.nextByte();
+            input.nextLine();
 
             switch (pilihan) {
                 case 1 :
@@ -57,15 +58,22 @@ public class To_do_list {
                         System.out.print(".");
                         delay();
                     }
-                    for (int i = 0; i < allTeks.size(); i++){
-                        System.out.print(allTeks.get(i));
+                    if (allTeks.isEmpty()){
+                        System.out.println("Belum ada catatan");
+                    } else {
+                        for (int i = 0; i < allTeks.size(); i++){
+                            System.out.print(allTeks.get(i) + " ");
+                        }
                     }
+                    break;
+                case 3 :
+                
             default :
                 System.out.println("Sistem tidak tersedia");         
                 status = false;       
             }
 
-            System.out.println("Apakah anda ingin keluar dari aplikasi ? (y/n) : ");
+            System.out.println("\nApakah anda ingin keluar dari aplikasi ? (y/n) : ");
             char keluar = input.next().charAt(0);
             input.nextLine();
             
